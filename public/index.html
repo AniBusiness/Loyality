@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Perks Club · Loyalty</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f0ff;--ink:#1e1537;--muted:#6f6591;--card:#fff;--line:#e3dbff;--accent:#7c3aed;--dark:#2a1463;--ok:#12b76a;--pink:#ff4d8d;--gold:#ffc83d;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#120b24;--ink:#f3edff;--muted:#a99bd0;--card:#1e1440;--line:#35275f;--dark:#0b0618;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#120b24;--ink:#f3edff;--muted:#a99bd0;--card:#1e1440;--line:#35275f;--dark:#0b0618;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(60% 40% at 95% -5%,#ff4d8d33,transparent),radial-gradient(60% 40% at -10% 12%,#7c3aed33,transparent),var(--bg);background-attachment:fixed;color:var(--ink);font:16px/1.5 Inter,system-ui,sans-serif;min-height:100vh}
+#app{max-width:440px;margin:0 auto;padding:28px 20px 40px;animation:in .4s ease}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+h1,h2{font-family:Fraunces,Georgia,serif;margin:0;letter-spacing:-.01em}
+h1{font-size:34px;line-height:1.1}h2{font-size:24px}
+.muted{color:var(--muted)}.logo{font-size:44px;margin-bottom:18px}
+.hero{padding-top:8vh}
+label{display:block;font-size:13px;font-weight:600;margin:18px 0 6px}
+input{width:100%;padding:14px 16px;font:inherit;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:14px;outline:none;transition:.2s}
+input:focus{border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 18%,transparent)}
+.phone{display:flex;gap:8px}.phone span{padding:14px 14px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;font-weight:600}
+.otp{text-align:center;font-size:28px;letter-spacing:.5em;font-weight:600}
+.btn{width:100%;margin-top:22px;padding:16px;border:0;border-radius:16px;background:linear-gradient(135deg,var(--accent),var(--pink));box-shadow:0 10px 24px -8px #ff4d8d99;color:#fff;font:700 16px Inter,sans-serif;cursor:pointer;transition:.15s}
+.btn:active{transform:scale(.98)}.btn:disabled{opacity:.5}
+.btn.ghost{background:none;box-shadow:none;color:var(--muted);margin-top:6px;font-weight:500}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:10px 16px;border:1.5px solid var(--line);border-radius:99px;background:var(--card);cursor:pointer;font-size:14px;color:var(--ink)}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--pink));color:#fff;display:grid;place-items:center;font-weight:600}
+.stage{perspective:900px}.loyal{background:linear-gradient(145deg,color-mix(in srgb,var(--c1,#7c3aed) 70%,#000),var(--c1,#7c3aed) 55%,var(--pink));color:#fff;border-radius:28px;padding:22px;box-shadow:0 30px 50px -20px rgba(124,58,237,.75);position:relative;transform-style:preserve-3d;transition:transform .15s ease-out;will-change:transform}.sheen{position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at var(--mx,30%) var(--my,0%),#ffffff55,transparent 55%);pointer-events:none}
+
+.loyal small{opacity:.7;letter-spacing:.12em;text-transform:uppercase;font-size:11px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0 6px;transform-style:preserve-3d}
+.dot{aspect-ratio:1;border-radius:50%;border:2px dashed #ffffff45;display:grid;place-items:center;font-size:22px;color:#ffffff66;transform:translateZ(24px)}
+.dot.f{border:0;background:radial-gradient(circle at 30% 25%,#fff9,transparent 40%),linear-gradient(145deg,var(--gold),#ff9f1c);color:#fff;box-shadow:0 8px 14px -4px #0006,inset 0 -4px 8px #0003;animation:slam .6s cubic-bezier(.3,1.5,.5,1) both}
+.dot.gift{border-color:var(--gold);color:var(--gold);animation:wob 2.4s ease-in-out infinite}.dot.gift.f{background:var(--gold);color:#3d2b1f;animation:slam .6s both,glow 1.4s ease-in-out .6s infinite}
+@keyframes slam{from{transform:translateZ(140px) rotateX(70deg) scale(2);opacity:0}to{transform:translateZ(24px);opacity:1}}@keyframes wob{0%,100%{transform:translateZ(24px) rotate(-8deg)}50%{transform:translateZ(24px) rotate(8deg) scale(1.08)}}@keyframes glow{50%{box-shadow:0 0 0 8px #ffc83d44,0 0 30px 6px #ffc83d99}}@keyframes bounce{50%{transform:scale(1.04)}}@keyframes spin{to{transform:rotateY(360deg)}}@keyframes fl{50%{transform:translateY(-8px)}}
+.msg{margin-top:14px;font-weight:500}
+.ready{background:var(--gold);color:#3d2b1f;border-radius:14px;padding:12px 14px;margin-top:14px;font-weight:700;text-align:center;animation:bounce 1.2s ease-in-out infinite}
+.bar{height:10px;background:#ffffff30;border-radius:9px;margin-top:14px;overflow:hidden}.bar i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#ffc83d,#fff2b8,#ffc83d);transition:width .8s cubic-bezier(.3,1.4,.5,1)}.pill{display:inline-block;background:#ffffff26;border-radius:99px;padding:4px 12px;font-size:12px;font-weight:600;margin-top:12px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px}.box b{font:700 26px Fraunces,serif;display:block}
+.row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
+.link{background:none;border:0;color:var(--muted);font:inherit;font-size:13px;text-decoration:underline;cursor:pointer;margin-top:26px;display:block;margin-inline:auto}
+.coinwrap{perspective:600px;height:104px;animation:fl 3s ease-in-out infinite}.coin{width:84px;height:84px;position:relative;transform-style:preserve-3d;animation:spin 4s linear infinite}.coin i{position:absolute;inset:0;border-radius:50%;display:grid;place-items:center;font-size:40px;font-style:normal;background:radial-gradient(circle at 30% 25%,#fff9,transparent 45%),linear-gradient(145deg,var(--gold),#ff9f1c);box-shadow:inset 0 -6px 10px #0003,0 12px 24px -6px #ff9f1c88;backface-visibility:hidden}.coin i+i{transform:rotateY(180deg)}#fx{position:fixed;inset:0;pointer-events:none;z-index:20}@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+.sheet{position:fixed;inset:0;background:#0007;display:flex;align-items:flex-end;justify-content:center;z-index:5}
+.sheet>div{background:var(--bg);width:100%;max-width:440px;border-radius:26px 26px 0 0;padding:24px 20px calc(24px + env(safe-area-inset-bottom,0px));animation:in .3s}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--dark);color:#fff;padding:12px 18px;border-radius:14px;opacity:0;transition:.3s;z-index:9;max-width:90%;font-size:14px;pointer-events:none;text-align:center}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div id="app"></div><div id="toast"></div><canvas id="fx"></canvas>
+<script>
+const DEMO = false; // true = built-in browser demo. Set to false when deployed with server.js (stores then come from the URL: yourdomain.com/store1)
+const API_URL = ""; // "" = same origin as server.js. Or e.g. "https://api.example.com"
+const CC = "+91";
+const S = {view:"phone",phone:"",token:null,user:null,store:"",st:null,card:null,wallet:[],gender:"",busy:false};
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function toast(t){const e=$("toast");e.textContent=t;e.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("show"),3200)}
+function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}}
+
+/* ---------- Demo backend (used only when API_URL is empty) ---------- */
+const DEMO_STORES={"store1":{slug:"store1",name:"Green Leaf Grocers",emoji:"🌿",goal:6,color:"#12b76a",pin:"1234"},"store2":{slug:"store2",name:"Urban Cuts Salon",emoji:"💈",goal:5,color:"#f43f5e",pin:"4321"}};
+let D=(()=>{try{return JSON.parse(ls("ly_db4"))}catch(e){return null}})()||{users:{},otps:{}};
+const persist=()=>ls("ly_db4",JSON.stringify(D));
+Object.entries(D.edits||{}).forEach(([k,v])=>DEMO_STORES[k]&&Object.assign(DEMO_STORES[k],v));
+const pub=x=>({slug:x.slug,name:x.name,emoji:x.emoji,goal:x.goal,color:x.color});
+const newCard=()=>({stamps:0,freeRedeemed:0,history:[]});
+function view(phone,slug){
+  const u=D.users[phone], {cards,pin,...user}=u; cards[slug]=cards[slug]||newCard(); persist();
+  return {user,store:pub(DEMO_STORES[slug]),card:cards[slug],wallet:Object.keys(cards).map(k=>({...pub(DEMO_STORES[k]),stamps:cards[k].stamps}))};
+}
+function mock(path,method,b){
+  const err=m=>{throw new Error(m)}, [route,qs]=path.split("?"), q=new URLSearchParams(qs||"").get("store");
+  if(route==="/store"){ if(!DEMO_STORES[q]) err("Unknown store"); return {store:pub(DEMO_STORES[q])} }
+  if(route==="/auth/check"){ if(!/^\d{10}$/.test(b.phone)) err("Enter a valid 10-digit number"); const u=D.users[b.phone]; return {exists:!!u,reset:!!u&&!u.pin&&u.resetUntil>Date.now()} }
+  if(route==="/auth/signup"){
+    if(!/^\d{10}$/.test(b.phone)) err("Enter a valid 10-digit number"); if(D.users[b.phone]) err("This number already has a card — sign in, or ask at the counter to reset your password");
+    D.users[b.phone]={phone:b.phone,pin:b.password,name:b.name,age:b.age,gender:b.gender,email:b.email,cards:{},createdAt:new Date().toISOString()};
+    return {token:b.phone,...view(b.phone,b.store)};
+  }
+  if(route==="/auth/login"){
+    const u=D.users[b.phone]; if(u&&!u.pin&&u.resetUntil>Date.now()){u.pin=b.password;persist()}
+    if(!u||u.pin!==b.password) err("Wrong password"); return {token:b.phone,...view(b.phone,b.store)};
+  }
+  if(route==="/me"){ if(!D.users[S.token]) err("Please sign in again"); return view(S.token,q) }
+  if(route==="/store/settings"){
+    const st=DEMO_STORES[b.store]; if(!st||b.pin!==st.pin) err("Wrong staff PIN for this store");
+    const g=Math.round(+b.goal); if(!b.name.trim()||!(g>=2&&g<=20)) err("Enter a name and a goal between 2 and 20");
+    const f={name:b.name.trim(),emoji:b.emoji.trim()||"⭐",color:b.color,goal:g}; if(/^\d{4,8}$/.test(b.newPin||"")) f.pin=b.newPin;
+    Object.assign(st,f); D.edits=D.edits||{}; D.edits[b.store]={...D.edits[b.store],...f};
+    Object.values(D.users).forEach(u=>{const c=u.cards[b.store]; if(c) c.stamps=Math.min(c.stamps,g)}); persist(); return {store:pub(st)};
+  }
+  if(route.startsWith("/staff/")){
+    const st=DEMO_STORES[b.store]; if(!st||b.pin!==st.pin) err("Wrong staff PIN for this store");
+    const u=D.users[b.phone]; if(!u) err("No customer with that number — ask them to sign up first");
+    const c=u.cards[b.store]=u.cards[b.store]||newCard(), at=new Date().toISOString();
+    if(route==="/staff/reset-login"){ u.pin=null; u.resetUntil=Date.now()+900000; persist(); return {ok:true} }
+    if(route==="/staff/stamp"){ if(c.stamps>=st.goal) err("Free item is waiting — redeem it first"); c.stamps++; c.history.unshift({type:"stamp",at}) }
+    else { if(c.stamps<st.goal) err("Customer hasn’t earned a free item yet"); c.stamps=0; c.freeRedeemed++; c.history.unshift({type:"redeem",at}) }
+    return view(b.phone,b.store);
+  }
+}
+async function api(path, method="GET", body){
+  if(DEMO) return mock(path, method, body||{});
+  const r = await fetch(API_URL+"/api"+path,{method,headers:{"Content-Type":"application/json",...(S.token?{Authorization:"Bearer "+S.token}:{})},body:body?JSON.stringify(body):undefined});
+  const j = await r.json().catch(()=>({})); if(!r.ok) throw new Error(j.error||"Something went wrong"); return j;
+}
+async function run(fn){ if(S.busy) return; S.busy=true; try{ await fn() }catch(e){ toast(e.message) } S.busy=false }
+
+/* ---------- Screens ---------- */
+function go(v){ S.view=v; render() }
+function render(){
+  const a=$("app"); a.style.animation="none"; a.offsetWidth; a.style.animation="";
+  a.innerHTML = ({phone:vPhone,home:vHome})[S.view]();
+  if(S.view==="home") fx();
+  if(S.view==="otp") $("otp").focus();
+}
+function vPhone(){
+  const m=S.mode, st=S.step||0, on=g=>S.gender===g?"on":"";
+  const head=`<div class="coinwrap"><div class="coin"><i>${S.st.emoji}</i><i>🎁</i></div></div><div class="muted" style="font-weight:600">${esc(S.st.name)}</div><h1>Buy ${S.st.goal}.<br>Get the next one <span style="color:var(--pink)">free</span>.</h1>`;
+  const foot=`<button class="link" style="margin-top:12px" onclick="staff()">Staff counter</button>${DEMO?`<p class="muted" style="text-align:center;font-size:13px;margin-top:18px">Demo stores: <a href="#" onclick="pickStore('store1');return false">🌿 Green Leaf</a> · <a href="#" onclick="pickStore('store2');return false">💈 Urban Cuts</a></p>`:""}`;
+  if(st===0) return `<div class="hero">${head}<p class="muted">Enter your mobile number to start collecting stamps.</p>
+<label>Mobile number</label><div class="phone"><span>${CC}</span><input id="ph" type="tel" inputmode="numeric" maxlength="10" placeholder="98765 43210" autocomplete="tel-national" value="${esc(S.phone)}" onkeydown="if(event.key==='Enter')authCheck()"></div>
+<button class="btn" onclick="authCheck()">Continue</button>${foot}</div>`;
+  const who=`<div class="row" style="border:0;padding:0 0 2px"><b>${CC} ${esc(S.phone)}</b><button class="link" style="margin:0;display:inline" onclick="S.step=0;pick()">Change</button></div>`;
+  const pw=(t,id,ac,extra="")=>`<label>${t}</label><input id="${id}" type="password" placeholder="••••••" autocomplete="${ac}" ${extra}>`;
+  if(m==="login") return `<div class="hero">${head}<h2 style="margin-top:6px">Welcome back 👋</h2>${who}
+${pw("Password","pn","current-password","onkeydown=\"if(event.key==='Enter')authSubmit()\"")}<button class="btn" onclick="authSubmit()">Sign in</button>
+<p class="muted" style="font-size:13px;text-align:center;margin:10px 0 0">Forgot your password? Ask at the counter to reset it.</p>${foot}</div>`;
+  if(m==="reset") return `<div class="hero">${head}<h2 style="margin-top:6px">Set a new password</h2>${who}
+${pw("New password (min 4 characters)","pn","new-password")}${pw("Confirm password","pc","new-password")}<button class="btn" onclick="authSubmit()">Save & sign in</button>${foot}</div>`;
+  return `<div class="hero">${head}<h2 style="margin-top:6px">Nice to meet you! 🎉</h2><p class="muted" style="margin:4px 0">Create your free card — it takes 20 seconds.</p>${who}
+${pw("Create a password (min 4 characters)","pn","new-password")}${pw("Confirm password","pc","new-password")}
+<label>Name</label><input id="nm" placeholder="Your name" autocomplete="name"><label>Age</label><input id="ag" type="number" inputmode="numeric" min="5" max="110" placeholder="e.g. 27">
+<label>Gender</label><div class="chips">${["Female","Male","Other","Prefer not to say"].map(g=>`<div class="chip ${on(g)}" onclick="S.gender='${g}';pick()">${g}</div>`).join("")}</div>
+<label>Email <span class="muted">(optional)</span></label><input id="em" type="email" placeholder="you@email.com" autocomplete="email">
+<button class="btn" onclick="authSubmit()">Create my card 🎉</button>${foot}</div>` }
+function vHome(){
+  const u={...S.user,...S.card}, st=S.st, GOAL=st.goal, n=u.stamps, ready=n>=GOAL, left=GOAL-n;
+  const dots=Array.from({length:GOAL+1},(_,i)=>{const g=i===GOAL, f=g?ready:i<n; return `<div class="dot ${g?"gift":""} ${f?"f":""}" style="animation-delay:${i*60}ms">${g?"🎁":f?st.emoji:i+1}</div>`}).join("");
+  return `<div class="top"><div><div class="muted" style="font-size:13px">Hello,</div><h2>${esc(u.name.split(" ")[0])}</h2></div><div class="avatar">${esc(u.name[0].toUpperCase())}</div></div>
+<div class="stage"><div class="loyal" id="card"><div class="sheen"></div><small>${esc(st.name)} · ${CC} ${esc(u.phone)}</small><div class="grid">${dots}</div>
+<div class="bar"><i style="width:${Math.min(100,n/GOAL*100)}%"></i></div><span class="pill">🏆 ${u.freeRedeemed*GOAL+n} lifetime stamps</span>
+${ready?`<div class="ready">🎉 Your next item is FREE — show this at the counter</div>`:`<div class="msg">${left===1?"🔥 Just 1 more — you’re SO close!":n===0?"Your first stamp is waiting ✨":left+" more to unlock your reward"}</div>`}</div></div>
+<div class="stats"><div class="box"><b>${n}/${GOAL}</b><span class="muted">Stamps</span></div><div class="box"><b>${u.freeRedeemed}</b><span class="muted">Free items won</span></div></div>
+${walletHtml(st)}<h2 style="font-size:18px;margin-top:22px">Recent activity</h2>
+${u.history.length?u.history.slice(0,6).map(h=>`<div class="row"><span>${h.type==="stamp"?"✅ Stamp added":"🎁 Free item redeemed"}</span><span class="muted">${new Date(h.at).toLocaleDateString(undefined,{day:"numeric",month:"short"})}</span></div>`).join(""):`<p class="muted">No purchases yet. Your first stamp is one coffee away!</p>`}
+<button class="link" onclick="staff()">Staff counter</button><button class="link" style="margin-top:10px" onclick="logout()">Log out</button>` }
+function pick(){ const k=[...document.querySelectorAll("#app input")].map(i=>[i.id,i.value]); render(); k.forEach(([i,v])=>{const e=$(i); if(e) e.value=v}) }
+
+/* ---------- Store settings (PIN-protected, edited by the store itself) ---------- */
+function settings(pin){
+  const st=S.st, s=document.createElement("div"); s.className="sheet"; s.onclick=e=>{if(e.target===s)s.remove()};
+  s.innerHTML=`<div style="max-height:90vh;overflow:auto"><h2>Store settings</h2><label>Store name</label><input id="s1" value="${esc(st.name)}"><label>Stamp emoji</label><input id="s2" maxlength="4" value="${esc(st.emoji)}">
+  <label>Brand colour</label><input id="s3" type="color" value="${esc(st.color)}" style="height:50px;padding:6px"><label>Purchases needed for a free item</label><input id="s4" type="number" min="2" max="20" value="${st.goal}">
+  <label>New staff PIN <span class="muted">(optional, 4–8 digits)</span></label><input id="s5" type="password" inputmode="numeric" maxlength="8"><button class="btn" id="sb">Save changes</button></div>`;
+  document.body.appendChild(s);
+  $("sb").onclick=()=>run(async()=>{
+    const r=await api("/store/settings","PUT",{store:S.store,pin,name:$("s1").value,emoji:$("s2").value,color:$("s3").value,goal:+$("s4").value,newPin:$("s5").value});
+    S.st=r.store; brand(S.st); if(S.user){ prevStamps=null; try{ apply(await api("/me?store="+S.store)) }catch(e){} }
+    document.querySelectorAll(".sheet").forEach(x=>x.remove()); render(); toast("Store updated ✓") });
+}
+
+/* ---------- Multi-store ---------- */
+function apply(r){ S.user=r.user; S.card=r.card; S.st=r.store; S.wallet=r.wallet; brand(S.st) }
+function brand(st){ const r=document.documentElement.style; r.setProperty("--accent",st.color); r.setProperty("--c1",st.color); document.title=st.name }
+function walletHtml(st){
+  const row=(e,t,r,k)=>`<div class="row" style="cursor:pointer" onclick="switchStore('${k}')"><span>${e} ${esc(t)}</span><span class="muted">${r} ›</span></div>`;
+  let h=S.wallet.filter(w=>w.slug!==st.slug).map(w=>row(w.emoji,w.name,w.stamps+"/"+w.goal,w.slug)).join("");
+  if(DEMO) h+=Object.values(DEMO_STORES).filter(d=>!S.wallet.some(w=>w.slug===d.slug)).map(d=>row(d.emoji,"Visit "+d.name+" (demo)","",d.slug)).join("");
+  return h?`<h2 style="font-size:18px;margin-top:22px">Your other cards</h2>${h}`:"";
+}
+const switchStore=k=>run(async()=>{ S.store=k; ls("ly_store2",k); prevStamps=null; apply(await api("/me?store="+k)); render(); scrollTo(0,0) });
+const pickStore=k=>run(async()=>{ S.store=k; ls("ly_store2",k); S.st=(await api("/store?store="+k)).store; brand(S.st); render() });
+
+/* ---------- Delight: 3D tilt, confetti, haptics ---------- */
+let prevStamps=null;
+const buzz=p=>{try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}};
+function fx(){
+  const u=S.card,GOAL=S.st.goal,c=$("card"); if(!c) return;
+  if(prevStamps!==null&&u.stamps!==prevStamps){ if(u.stamps>=GOAL){confetti(180);buzz([60,40,120])} else if(u.stamps>prevStamps){confetti(70);buzz(40)} }
+  else if(prevStamps===null&&u.stamps>=GOAL) setTimeout(()=>confetti(110),500);
+  prevStamps=u.stamps;
+  c.onpointermove=e=>{const r=c.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;c.style.transform=`rotateY(${(px-.5)*20}deg) rotateX(${(.5-py)*20}deg)`;c.style.setProperty("--mx",px*100+"%");c.style.setProperty("--my",py*100+"%")};
+  c.onpointerleave=c.onpointercancel=()=>{c.style.transform=""};
+}
+function confetti(n){
+  const cv=$("fx"),x=cv.getContext("2d"); cv.width=innerWidth; cv.height=innerHeight;
+  const cols=["#ffc83d","#ff4d8d","#7c3aed","#22d3ee","#12b76a"];
+  const p=Array.from({length:n},()=>({x:innerWidth/2,y:innerHeight*.4,vx:(Math.random()-.5)*14,vy:-Math.random()*14-4,s:5+Math.random()*7,r:Math.random()*6,vr:(Math.random()-.5)*.4,c:cols[Math.random()*5|0]}));
+  (function f(){x.clearRect(0,0,cv.width,cv.height);let a=0;p.forEach(q=>{q.vy+=.35;q.x+=q.vx;q.y+=q.vy;q.r+=q.vr;if(q.y<cv.height+20)a++;x.save();x.translate(q.x,q.y);x.rotate(q.r);x.fillStyle=q.c;x.fillRect(-q.s/2,-q.s/2,q.s,q.s*.6);x.restore()});if(a)requestAnimationFrame(f);else x.clearRect(0,0,cv.width,cv.height)})();
+}
+
+/* ---------- Actions ---------- */
+const authCheck = () => run(async()=>{
+  const phone=$("ph").value.replace(/\D/g,""); if(!/^\d{10}$/.test(phone)) throw new Error("Enter a valid 10-digit number");
+  const r=await api("/auth/check","POST",{phone,store:S.store}); S.phone=phone; S.mode=r.reset?"reset":r.exists?"login":"signup"; S.step=1; render();
+});
+const authSubmit = () => run(async()=>{
+  const phone=S.phone, pw=$("pn").value, su=S.mode==="signup"; let r;
+  if(pw.length<4) throw new Error("Password must be at least 4 characters");
+  if(su||S.mode==="reset"){ if(pw!==$("pc").value) throw new Error("The two passwords don’t match") }
+  if(su){
+    const name=$("nm").value.trim(), age=+$("ag").value;
+    if(!name) throw new Error("Please enter your name"); if(!(age>=5&&age<=110)) throw new Error("Please enter a valid age"); if(!S.gender) throw new Error("Please pick an option for gender");
+    r=await api("/auth/signup","POST",{phone,password:pw,name,age,gender:S.gender,email:$("em").value.trim(),store:S.store});
+  } else r=await api("/auth/login","POST",{phone,password:pw,store:S.store});
+  S.token=r.token; ls("ly_token",r.token); prevStamps=null; apply(r); go("home"); if(su){ confetti(140); buzz(80) }
+});
+function logout(){ S.step=0; S.token=null; S.user=null; ls("ly_token",null); go("phone") }
+async function refresh(){ if(S.view!=="home"||document.hidden) return; try{ const r=await api("/me?store="+S.store); if(JSON.stringify(r.card)!==JSON.stringify(S.card)){apply(r);render()} }catch(e){} }
+
+function staff(){
+  const s=document.createElement("div"); s.className="sheet"; s.onclick=e=>{if(e.target===s)s.remove()};
+  s.innerHTML=`<div><h2>Staff counter</h2><p class="muted">${DEMO?"Demo PIN: "+DEMO_STORES[S.store].pin:""}</p>
+  <label>Staff PIN</label><input id="sp" type="password" inputmode="numeric"><label>Customer mobile</label><input id="sc" type="tel" inputmode="numeric" maxlength="10" value="${esc(S.user?.phone||"")}">
+  <button class="btn" id="b1">＋ Add purchase stamp</button><button class="btn" id="b2" style="background:var(--dark)">🎁 Redeem free item</button><button class="btn ghost" id="b4">🔑 Reset a customer’s password</button><button class="btn ghost" id="b3">⚙️ Store settings</button></div>`;
+  document.body.appendChild(s);
+  const act=(p,msg)=>()=>run(async()=>{ const r=await api(p,"POST",{pin:$("sp").value,phone:$("sc").value,store:S.store}); toast(msg+" for "+r.user.name.split(" ")[0]+" · "+r.card.stamps+"/"+r.store.goal); if(S.user&&S.user.phone===r.user.phone){apply(r);render()} });
+  $("b4").onclick=()=>run(async()=>{ await api("/staff/reset-login","POST",{pin:$("sp").value,phone:$("sc").value,store:S.store}); toast("Password reset ✓ The customer can now choose a new password within 15 minutes") });
+  $("b3").onclick=()=>{ if(!$("sp").value) return toast("Enter the staff PIN first"); settings($("sp").value) };
+  $("b1").onclick=act("/staff/stamp","Stamp added"); $("b2").onclick=act("/staff/redeem","Free item redeemed");
+}
+
+(async function init(){
+  S.token=ls("ly_token"); S.step=0; setInterval(refresh,20000);
+  const seg=location.pathname.split("/").filter(Boolean)[0]||"";
+  S.store=(!DEMO&&/^[a-z0-9-]{2,40}$/.test(seg)?seg:"")||new URLSearchParams(location.search).get("store")||location.hash.slice(1)||(DEMO?ls("ly_store2")||"store1":"");
+  try{ S.st=(await api("/store?store="+S.store)).store; brand(S.st) }
+  catch(e){ $("app").innerHTML=`<div class="hero"><div class="logo">🔗</div><h2>Store not found</h2><p class="muted">We couldn’t find ${S.store?"“"+esc(S.store)+"”":"this store"}. Check the link or scan the QR code at the counter.</p></div>`; return }
+  if(S.token){ try{ apply(await api("/me?store="+S.store)); return go("home") }catch(e){ S.token=null; ls("ly_token",null) } }
+  render();
+})();
+</script>
+</body>
+</html>
