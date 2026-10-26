@@ -11,5 +11,5 @@ run_worker_first = ["/api/*"]                     # the Worker only runs for API
 [[d1_databases]]
 binding = "DB"
 database_name = "loyalty"
-database_id = "PASTE-ID-FROM-d1-create"
+database_id = "6bafb53b-7368-48fa-96b7-82d24eb4d4e9"
 
